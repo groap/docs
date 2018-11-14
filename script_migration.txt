@@ -1,0 +1,15 @@
+svn log -q | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > authors-transform.txt
+
+git svn clone https://10.1.201.21/svn/cain/general/trunk --username groa --no-metadata -A authors-transform.txt
+
+cd trunk/
+
+cp /c//Users/groa/Documents/svn_to_git/.gitignore .
+
+git remote add origin http://10.1.207.72/Tantalo/Cain/General.git
+
+git add .
+
+git commit -m "Migration SVN to Git"
+
+git push -u origin master
